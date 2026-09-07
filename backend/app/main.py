@@ -17,6 +17,7 @@ from app.core.exceptions import (
 from app.api.v1.auth.router import router as auth_router
 from app.api.v1.assistants.router import router as assistants_router
 from app.api.v1.knowledge.router import router as knowledge_router
+from app.api.v1.public.router import router as public_router
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +40,7 @@ if settings.BACKEND_CORS_ORIGINS:
 app.include_router(auth_router, prefix=settings.API_V1_STR)
 app.include_router(assistants_router, prefix=settings.API_V1_STR)
 app.include_router(knowledge_router, prefix=settings.API_V1_STR)
+app.include_router(public_router, prefix=settings.API_V1_STR)
 
 
 # Exception Handlers

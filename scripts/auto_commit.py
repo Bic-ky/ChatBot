@@ -180,7 +180,12 @@ def auto_commit(
     formatted_msg = f"{commit_type}({scope}): {message}" if scope else f"{commit_type}: {message}"
     print(f"[PIPELINE] Commit message: \"{formatted_msg}\"")
 
-    env_vars = {}
+    env_vars = {
+        "GIT_AUTHOR_NAME": "Bicky Yadav",
+        "GIT_AUTHOR_EMAIL": "114137746+Bic-ky@users.noreply.github.com",
+        "GIT_COMMITTER_NAME": "Bicky Yadav",
+        "GIT_COMMITTER_EMAIL": "114137746+Bic-ky@users.noreply.github.com",
+    }
     if not commit_date:
         commit_date = get_next_chronological_date()
 
