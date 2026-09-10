@@ -150,14 +150,16 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               href="/login"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-500 shadow-xl shadow-indigo-600/25 transition-all flex items-center justify-center gap-2"
+              aria-label="Deploy your first AI assistant"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-500 shadow-xl shadow-indigo-600/25 transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
             >
               <span>Deploy Your First Assistant</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href="#demo"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 text-xs font-semibold transition-all flex items-center justify-center gap-2"
+              aria-label="Navigate to live interactive assistant demo"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 text-xs font-semibold transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               <Bot className="h-4 w-4 text-indigo-400" />
               <span>Try Live Interactive Demo</span>
@@ -199,30 +201,43 @@ export default function LandingPage() {
           </div>
 
           {/* Demo Shell */}
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden max-w-3xl mx-auto">
+          <div
+            role="region"
+            aria-label="Interactive AI Sandbox Playground"
+            className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden max-w-3xl mx-auto"
+          >
             {/* Window header */}
             <div className="h-12 bg-slate-800/60 px-4 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-red-500/80" />
-                <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                <span className="h-3 w-3 rounded-full bg-green-500/80" />
+                <span className="h-3 w-3 rounded-full bg-red-500/80" aria-hidden="true" />
+                <span className="h-3 w-3 rounded-full bg-yellow-500/80" aria-hidden="true" />
+                <span className="h-3 w-3 rounded-full bg-green-500/80" aria-hidden="true" />
                 <span className="text-xs text-slate-400 font-mono ml-2">ChatBot Sandbox v0.3</span>
               </div>
               <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
                 pgvector Connected
               </span>
             </div>
 
             {/* Chat conversation area */}
-            <div className="p-6 space-y-4 min-h-[320px] max-h-[420px] overflow-y-auto">
+            <div
+              className="p-6 space-y-4 min-h-[320px] max-h-[420px] overflow-y-auto"
+              role="log"
+              aria-live="polite"
+              aria-atomic="false"
+              aria-label="Live demo conversation feed"
+            >
               {demoMessages.map((msg, i) => (
                 <div
                   key={i}
                   className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {msg.role === 'assistant' && (
-                    <div className="h-8 w-8 rounded-lg bg-indigo-600/30 border border-indigo-500/30 text-indigo-400 flex items-center justify-center flex-shrink-0 text-xs">
+                    <div
+                      className="h-8 w-8 rounded-lg bg-indigo-600/30 border border-indigo-500/30 text-indigo-400 flex items-center justify-center flex-shrink-0 text-xs"
+                      aria-hidden="true"
+                    >
                       <Bot className="h-4 w-4" />
                     </div>
                   )}
@@ -237,13 +252,13 @@ export default function LandingPage() {
                       {msg.content}
                     </div>
                     {msg.sources && msg.sources.length > 0 && (
-                      <div className="flex flex-wrap gap-1 pt-1">
+                      <div className="flex flex-wrap gap-1 pt-1" aria-label="Verified sources cited">
                         {msg.sources.map((src, idx) => (
                           <span
                             key={idx}
                             className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-indigo-500/20 text-[10px] font-medium"
                           >
-                            <Paperclip className="h-2.5 w-2.5 text-indigo-400" />
+                            <Paperclip className="h-2.5 w-2.5 text-indigo-400" aria-hidden="true" />
                             {src}
                           </span>
                         ))}
@@ -253,7 +268,7 @@ export default function LandingPage() {
                 </div>
               ))}
               {isTyping && (
-                <div className="flex gap-3 items-center text-xs text-slate-400 pl-11">
+                <div className="flex gap-3 items-center text-xs text-slate-400 pl-11" aria-label="AI is thinking and searching documents">
                   <div className="h-2 w-2 rounded-full bg-indigo-400 animate-bounce" />
                   <div className="h-2 w-2 rounded-full bg-indigo-400 animate-bounce [animation-delay:0.2s]" />
                   <div className="h-2 w-2 rounded-full bg-indigo-400 animate-bounce [animation-delay:0.4s]" />
@@ -263,13 +278,14 @@ export default function LandingPage() {
             </div>
 
             {/* Quick Suggestions */}
-            <div className="px-6 py-2 bg-slate-900/60 border-t border-slate-800 flex items-center gap-2 overflow-x-auto text-[11px]">
+            <div className="px-6 py-2 bg-slate-900/60 border-t border-slate-800 flex items-center gap-2 overflow-x-auto text-[11px]" aria-label="Sample test queries">
               <span className="text-slate-500 flex-shrink-0 font-medium">Try:</span>
               {sampleQueries.map((q, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => handleDemoSubmit(q)}
-                  className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60 flex-shrink-0 transition-colors"
+                  className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60 flex-shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400"
                 >
                   {q}
                 </button>
@@ -284,7 +300,11 @@ export default function LandingPage() {
               }}
               className="p-3 bg-slate-800/40 border-t border-slate-800 flex gap-2"
             >
+              <label htmlFor="sandbox-query-input" className="sr-only">
+                Ask a question in the sandbox
+              </label>
               <input
+                id="sandbox-query-input"
                 type="text"
                 value={demoInput}
                 onChange={(e) => setDemoInput(e.target.value)}
@@ -294,7 +314,8 @@ export default function LandingPage() {
               <button
                 type="submit"
                 disabled={!demoInput.trim() || isTyping}
-                className="h-10 px-4 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-500 disabled:opacity-50 transition-all flex items-center gap-1.5 shadow-md shadow-indigo-600/20"
+                aria-label="Send query to sandbox assistant"
+                className="h-10 px-4 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-500 disabled:opacity-50 transition-all flex items-center gap-1.5 shadow-md shadow-indigo-600/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
               >
                 <span>Send</span>
                 <Send className="h-3.5 w-3.5" />
